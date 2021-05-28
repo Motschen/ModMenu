@@ -105,4 +105,9 @@ public class ModListEntry extends AlwaysSelectedEntryListWidget.Entry<ModListEnt
 	public int getXOffset() {
 		return 0;
 	}
+
+	@Override
+	public Text method_37006() {
+		return Text.of(mod.getName());
+	}
 }

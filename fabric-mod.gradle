@@ -1,0 +1,44 @@
+import net.fabricmc.loom.LoomGradlePlugin
+
+buildscript {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		maven {
+			name = 'TerraformersMC'
+			url = 'https://maven.terraformersmc.com/'
+		}
+		gradlePluginPortal()
+		mavenLocal()
+	}
+
+	dependencies {
+		classpath "net.fabricmc:fabric-loom:0.8-SNAPSHOT"
+	}
+}
+
+sourceCompatibility = 16
+targetCompatibility = 16
+
+archivesBaseName = project.archive_name
+group = project.maven_group
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+//apply plugin: LoomGradlePlugin // not sure what this was used for, it didn't let me setup gradle so I removed it.
+
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
+}
+
+jar {
+	from "LICENSE"
+}
